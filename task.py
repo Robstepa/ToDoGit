@@ -9,7 +9,7 @@ class Task():
         self.is_done = True
 
     def __str__(self):
-        if is_done:
-            return self.name + self.description + 'Done'
-        else:
-            return self.name + self.description + 'To Do'
+        if self.is_done is False:
+            return '| ' + self.name + ' | ' + self.description + ' | To Do |'
+        elif self.is_done is True:
+            return '| ' + self.name + ' | ' + self.description + ' | Done |'
