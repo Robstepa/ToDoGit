@@ -52,6 +52,20 @@ def delete_task(todo_list):
         break
 
 
+def mark_task(todo_list):
+    while True:
+        try:
+            task_index = int(input('Enter task index: '))
+        except ValueError:
+            print("Index must be a number")
+            continue
+        task_index -= 1
+        for item in todo_list.tasks:
+            if task_index == todo_list.tasks.index(item):
+                item.change_task_status()
+        break
+
+
 def main():
     system('clear')
     todo_list = TaskList()
