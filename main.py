@@ -40,6 +40,18 @@ def modify_task(todo_list):
         break
 
 
+def delete_task(todo_list):
+    while True:
+        try:
+            task_index = int(input('Enter task index: '))
+        except ValueError:
+            print("Index must be a number")
+            continue
+        task_index -= 1
+        todo_list.remove_task(task_index)
+        break
+
+
 def main():
     system('clear')
     todo_list = TaskList()
