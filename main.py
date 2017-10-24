@@ -18,6 +18,28 @@ def add_task(todo_list):
         break
 
 
+def modify_task(todo_list):
+    while True:
+        try:
+            task_index = int(input('Enter task index: '))
+        except ValueError:
+            print("Index must be a number")
+            continue
+        task_index -= 1
+        todo_list.remove_task(task_index)
+        name = input("Enter your name(max 20 symbols): ")
+        if len(name) > 20:
+            print("Your name is too long")
+            continue
+        description = input("Describe your task(max 150 symbols): ")
+        if len(description) > 150:
+            print("Your description is too long")
+            continue
+        todo_task = Task(name, description)
+        todo_list.modify_task(name, description, task_index)
+        break
+
+
 def main():
     system('clear')
     todo_list = TaskList()
