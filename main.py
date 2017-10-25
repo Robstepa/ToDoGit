@@ -3,100 +3,82 @@ from task_list import TaskList
 from os import system
 
 
-def add_task(todo_list):
+def description_input():
+    while True:
+        description = input("Describe your task(max 150 symbols): ")
+        if len(description) > 150:
+            system('clear')
+            print("Your description is too long")
+            continue
+        return description
+
+
+def name_input():
     while True:
         name = input("Enter your name(max 20 symbols): ")
         if len(name) > 20:
+            system('clear')
             print("Your name is too long")
             continue
-        description = input("Describe your task(max 150 symbols): ")
-        if len(description) > 150:
-            print("Your description is too long")
+        return name
+
+
+def check_index(todo_list):
+    while True:
+        try:
+            task_index = int(input('Enter task index: '))
+        except ValueError:
+            system('clear')
+            print("Index must be a number")
             continue
-        todo_task = Task(name, description)
-        todo_list.add_task(name, description)
-        system('clear')
-        print('Done\n')
-        break
+        task_index -= 1
+        if (task_index + 1) > len(todo_list.tasks) or task_index < 0:
+            system('clear')
+            print('Index does not exist')
+            continue
+        return task_index
+
+
+def add_task(todo_list):
+    name = name_input()
+    description = description_input()
+    todo_task = Task(name, description)
+    todo_list.add_task(name, description)
+    system('clear')
+    print('Done\n')
 
 
 def modify_task(todo_list):
-    while True:
-        try:
-            task_index = int(input('Enter task index: '))
-        except ValueError:
-            print("Index must be a number")
-            continue
-        task_index -= 1
-        if task_index > len(todo_list.tasks) or task_index < 0:
-            print('Index does not exist')
-            continue
-        todo_list.remove_task(task_index)
-        name = input("Enter your name(max 20 symbols): ")
-        if len(name) > 20:
-            print("Your name is too long")
-            continue
-        description = input("Describe your task(max 150 symbols): ")
-        if len(description) > 150:
-            print("Your description is too long")
-            continue
-        todo_task = Task(name, description)
-        todo_list.modify_task(name, description, task_index)
-        system('clear')
-        print('Done\n')
-        break
+    task_index = check_index(todo_list)
+    todo_list.remove_task(task_index)
+    name = name_input()
+    description = description_input()
+    todo_task = Task(name, description)
+    todo_list.modify_task(name, description, task_index)
+    system('clear')
+    print('Done\n')
 
 
 def delete_task(todo_list):
-    while True:
-        try:
-            task_index = int(input('Enter task index: '))
-        except ValueError:
-            print("Index must be a number")
-            continue
-        task_index -= 1
-        if task_index > len(todo_list.tasks) or task_index < 0:
-            print('Index does not exist')
-            continue
-        todo_list.remove_task(task_index)
-        system('clear')
-        print('Done\n')
-        break
+    task_index = check_index(todo_list)
+    todo_list.remove_task(task_index)
+    system('clear')
+    print('Done\n')
 
 
 def mark_task(todo_list):
-    while True:
-        try:
-            task_index = int(input('Enter task index: '))
-        except ValueError:
-            print("Index must be a number")
-            continue
-        task_index -= 1
-        if task_index > len(todo_list.tasks) or task_index < 0:
-            print('Index does not exist')
-            continue
-        for item in todo_list.tasks:
-            if task_index == todo_list.tasks.index(item):
-                item.change_task_status()
-        system('clear')
-        print('Done\n')
-        break
+    task_index = check_index(todo_list)
+    for item in todo_list.tasks:
+        if task_index == todo_list.tasks.index(item):
+            item.change_task_status()
+    system('clear')
+    print('Done\n')
 
 
 def display_specific_task(todo_list):
-    while True:
-        try:
-            task_index = int(input('Enter task index: '))
-        except ValueError:
-            print("Index must be a number")
-            continue
-        task_index -= 1
-        if task_index > len(todo_list.tasks) or task_index < 0:
-            print('Index does not exist')
-            continue
-        print(todo_list.tasks[task_index])
-        print('\n')
-        break
+    task_index = check_index(todo_list)
+    print(todo_list.tasks[task_index])
+    print('\n')
 
 
 def main():
