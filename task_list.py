@@ -20,7 +20,7 @@ class TaskList():
         task_number = 1
         task_string = ''
         for item in self.tasks:
-            item = str(task_number) + ' ' + str(item)
+            item = '| ' + str(task_number) + ' | ' + str(item.name) + ' |'
             task_string += item + '\n'
             task_number += 1
         return task_string
