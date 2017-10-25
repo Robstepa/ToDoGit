@@ -3,7 +3,7 @@ from task_list import TaskList
 from os import system
 
 
-def description_input():
+def description_input():  # function which check description given by user
     while True:
         description = input("Describe your task(max 150 symbols): ")
         if len(description) > 150:
@@ -13,7 +13,7 @@ def description_input():
         return description
 
 
-def name_input():
+def name_input():  # function which check name given by user
     while True:
         name = input("Enter your name(max 20 symbols): ")
         if len(name) > 20:
@@ -23,7 +23,7 @@ def name_input():
         return name
 
 
-def check_index(todo_list):
+def check_index(todo_list):  # function which check index given by user
     while True:
         try:
             task_index = int(input('Enter task index: '))
@@ -39,7 +39,7 @@ def check_index(todo_list):
         return task_index
 
 
-def add_task(todo_list):
+def add_task(todo_list):  # add task with name and description given by user
     name = name_input()
     description = description_input()
     todo_task = Task(name, description)
@@ -48,7 +48,7 @@ def add_task(todo_list):
     print('Done\n')
 
 
-def modify_task(todo_list):
+def modify_task(todo_list):  # modify specific task chosen by user
     task_index = check_index(todo_list)
     todo_list.remove_task(task_index)
     name = name_input()
@@ -59,14 +59,14 @@ def modify_task(todo_list):
     print('Done\n')
 
 
-def delete_task(todo_list):
+def delete_task(todo_list):  # delete specific task chosen by user
     task_index = check_index(todo_list)
     todo_list.remove_task(task_index)
     system('clear')
     print('Done\n')
 
 
-def mark_task(todo_list):
+def mark_task(todo_list):  # mark specific task chosen by user
     task_index = check_index(todo_list)
     for item in todo_list.tasks:
         if task_index == todo_list.tasks.index(item):
@@ -75,7 +75,7 @@ def mark_task(todo_list):
     print('Done\n')
 
 
-def display_specific_task(todo_list):
+def display_specific_task(todo_list):  # show specific task chosen by user
     task_index = check_index(todo_list)
     print(todo_list.tasks[task_index])
     print('\n')
@@ -98,7 +98,7 @@ def main():
         if len(todo_list.tasks) < 1:
             print('There is nothing to show...\n')
             continue
-        else:
+        else:  # You can`t use this before you add some task to your todo_list
             if user_input == '2':
                 modify_task(todo_list)
             if user_input == '3':
